@@ -13,7 +13,9 @@ contributors: []
 pinned: false
 homepage: false
 ---
+
 ## Logging and Monitoring in k8s
+
 Logging and monitoring in Kubernetes are important for understanding the behavior and performance of a cluster. Logging
 allows tracking events and activities, while monitoring provides real-time visibility into the resource usage,
 performance, and availability of the cluster and its components. Together, they help detect and diagnose issues,
@@ -32,7 +34,7 @@ Prometheus. It is designed to be very cost-effective and easy to operate, as it 
 but rather a set of labels for each log stream. It allows to search and analyze logs by labels, which can be used as a
 replacement for Prometheus metrics for certain use cases.
 
-#### Installing kube-prometheus-stack
+### Installing kube-prometheus-stack
 
 prom-values.yaml
 
@@ -61,7 +63,7 @@ helm repo update
 helm upgrade --install prom prometheus-community/kube-prometheus-stack -n monitoring --create-namespace --values prom-values.yaml
 ```
 
-#### Installing prom-tail
+### Installing prom-tail
 
 promtail-values.yaml
 
@@ -79,18 +81,16 @@ helm repo update
 helm upgrade --install promtail grafana/promtail -f promtail-values.yaml -n monitoring
 ```
 
-#### Installing loki
+### Installing loki
 
 ```shell
 helm upgrade --install loki grafana/loki-distributed -n monitoring
 ```
 
-#### Viewing Grafana
+### Viewing Grafana
 
 ```shell
 kubectl port-forward service/prom-grafana 3000:80 -n monitoring
 ```
 
 The default login to Grafana is user "admin" password "prom-operator".
-
-

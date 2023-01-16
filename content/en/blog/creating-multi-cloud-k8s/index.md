@@ -15,6 +15,3 @@ homepage: false
 ---
 
 ## Considerations for creating a multi cloud k8s cluster
-
-
-
