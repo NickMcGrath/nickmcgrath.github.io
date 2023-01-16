@@ -28,11 +28,12 @@
 #   identifier = "lorem"
 #   url = "/tutorial/lorem/"
 #
-[[main]]
-  name = "Docs"
-  url = "/docs/prologue/introduction/"
-# url = "/docs/1.0/prologue/introduction/"
-  weight = 10
+# THIS IS THE MAIN DOCS MENU AT TOP
+# [[main]]
+#   name = "Docs"
+#   url = "/docs/prologue/introduction/"
+# # url = "/docs/1.0/prologue/introduction/"
+#   weight = 10
 
 # [[main]]
 #   name = "Tutorial"
