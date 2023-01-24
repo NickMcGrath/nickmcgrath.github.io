@@ -30,7 +30,7 @@ grafana:
 
 </code></pre><pre><code class=language-shell>helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm upgrade --install prom prometheus-community/kube-prometheus-stack -n monitoring --create-namespace --values prom-values.yaml
+helm upgrade --install prom prometheus-community/kube-prometheus-stack -n monitoring --create-namespace --values prom-values.yaml --version 44.2.1
 </code></pre><h3 id=installing-prom-tail>Installing prom-tail <a href=#installing-prom-tail class=anchor aria-hidden=true>#</a></h3><p>promtail-values.yaml</p><pre><code class=language-yaml>config:
   serverPort: 80
   clients:
@@ -38,8 +38,8 @@ helm upgrade --install prom prometheus-community/kube-prometheus-stack -n monito
 
 </code></pre><pre><code class=language-shell>helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
-helm upgrade --install promtail grafana/promtail -f promtail-values.yaml -n monitoring
-</code></pre><h3 id=installing-loki>Installing loki <a href=#installing-loki class=anchor aria-hidden=true>#</a></h3><pre><code class=language-shell>helm upgrade --install loki grafana/loki-distributed -n monitoring
+helm upgrade --install promtail grafana/promtail -f promtail-values.yaml -n monitoring --version 6.8.1
+</code></pre><h3 id=installing-loki>Installing loki <a href=#installing-loki class=anchor aria-hidden=true>#</a></h3><pre><code class=language-shell>helm upgrade --install loki grafana/loki-distributed -n monitoring --version 0.69.1
 </code></pre><h3 id=viewing-grafana>Viewing Grafana <a href=#viewing-grafana class=anchor aria-hidden=true>#</a></h3><pre><code class=language-shell>kubectl port-forward service/prom-grafana 3000:80 -n monitoring
 </code></pre><p>The default login to Grafana is user &ldquo;admin&rdquo; password &ldquo;prom-operator&rdquo;.</p></div></div></article></div></div><footer class="footer text-muted"><div class=container-xxl><div class=row><div class="col-lg-8 order-last order-lg-first"><ul class=list-inline><li class=list-inline-item>Powered by <a class=text-muted href=https://www.netlify.com/>Netlify</a>, <a class=text-muted href=https://gohugo.io/>Hugo</a>, and <a class=text-muted href=https://getdoks.org/>Doks</a></li></ul></div><div class="col-lg-8 order-first order-lg-last text-lg-end"><ul class=list-inline></ul></div></div></div></footer><script src=https://nickmcgrath.github.io/js/bootstrap.min.87685cf4e6585276ff9e7b5d0b97e792615af6921e77821315d1ca7c5511ac2f30667e16c0d031e680ca8b57f63f6c0f6c4a232da777cce474b501ed81e090a9.js integrity="sha512-h2hc9OZYUnb/nntdC5fnkmFa9pIed4ITFdHKfFURrC8wZn4WwNAx5oDKi1f2P2wPbEojLad3zOR0tQHtgeCQqQ==" crossorigin=anonymous defer></script>
 <script src=https://nickmcgrath.github.io/js/highlight.min.56a414730f1135fe77b5ea30bf74a2cc4101a6f386e85e5b789c800570cc33d33054000f45932c053a59b41018f72687867254a80e1b9710671852492533162f.js integrity="sha512-VqQUcw8RNf53teowv3SizEEBpvOG6F5beJyABXDMM9MwVAAPRZMsBTpZtBAY9yaHhnJUqA4blxBnGFJJJTMWLw==" crossorigin=anonymous defer></script>
