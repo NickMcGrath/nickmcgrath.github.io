@@ -135,4 +135,3 @@ Append record pointing to ingress ip
 ```
 
 ![mynewblog.ca site](mynewblog.png "mynewblog.ca")
-
