@@ -60,7 +60,7 @@ grafana:
 ```shell
 helm repo add prometheus-community https://prometheus-community.github.io/helm-charts
 helm repo update
-helm upgrade --install prom prometheus-community/kube-prometheus-stack -n monitoring --create-namespace --values prom-values.yaml
+helm upgrade --install prom prometheus-community/kube-prometheus-stack -n monitoring --create-namespace --values prom-values.yaml --version 44.2.1
 ```
 
 ### Installing prom-tail
@@ -78,13 +78,13 @@ config:
 ```shell
 helm repo add grafana https://grafana.github.io/helm-charts
 helm repo update
-helm upgrade --install promtail grafana/promtail -f promtail-values.yaml -n monitoring
+helm upgrade --install promtail grafana/promtail -f promtail-values.yaml -n monitoring --version 6.8.1
 ```
 
 ### Installing loki
 
 ```shell
-helm upgrade --install loki grafana/loki-distributed -n monitoring
+helm upgrade --install loki grafana/loki-distributed -n monitoring --version 0.69.1
 ```
 
 ### Viewing Grafana

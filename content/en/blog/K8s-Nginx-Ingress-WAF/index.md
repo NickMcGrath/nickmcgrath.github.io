@@ -45,7 +45,8 @@ Cluster IP service.
 
 ```shell
 helm repo add bitnami https://charts.bitnami.com/bitnami
-helm upgrade --install wordpress bitnami/wordpress --set service.type=ClusterIP
+helm repo update
+helm upgrade --install wordpress bitnami/wordpress --set service.type=ClusterIP --set wordpressPassword='yolo' --version 15.2.33
 ```
 
 ```shell
@@ -82,9 +83,9 @@ controller:
       SecRequestBodyAccess On
 ```
 
-minikube tunnel runs as a process, creating a network route on the host to the service CIDR of the cluster using the cluster’s IP
-address as a gateway. The tunnel command exposes the external IP directly to any program running on the host operating
-system.
+minikube tunnel runs as a process, creating a network route on the host to the service CIDR of the cluster using the
+cluster’s IP address as a gateway. The tunnel command exposes the external IP directly to any program running on the
+host operating system.
 
 ```shell
 minikube tunnel
@@ -93,8 +94,9 @@ minikube tunnel
 Applying nginx helm chart
 
 ```shell
-helm repo add ingress-nginx https://kubernetes.github.io/ingress-nginx
-helm install ingress-nginx -f ./nginx-helm-values.yaml ingress-nginx/ingress-nginx -n nginx-ingress --create-namespace
+helm repo add nginx https://helm.nginx.com/stable
+helm repo update
+helm install ingress-nginx -f ./nginx-helm-values.yaml ingress-nginx/ingress-nginx -n nginx-ingress --create-namespace --version 0.16.0
 ```
 
 Applying ingress to WordPress service
@@ -133,3 +135,4 @@ Append record pointing to ingress ip
 ```
 
 ![mynewblog.ca site](mynewblog.png "mynewblog.ca")
+
