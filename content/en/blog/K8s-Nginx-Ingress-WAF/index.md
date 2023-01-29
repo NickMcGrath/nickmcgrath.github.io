@@ -53,7 +53,7 @@ flowchart
 A((Client)) -- Makes Request----> INGRESS
 subgraph K8[Kubernets Cluster]
  subgraph NGINX[NGINX Ingress]
-   INGRESS[Ingress] --> MOD
+   INGRESS[Ingress] -- Uses --> MOD
    MOD[ModSecurity] -- Uses --> OWASP{OWASP Ruleset}
    OWASP --Decides--> ALLOW[Allow Request]
    OWASP --Decides--> DENY[Deny Request]
@@ -84,7 +84,7 @@ minikube start
 
 We will use WordPress as an example application and create the ingress for the service.
 
-This helm deployment with set up WordPress frontend with a MariaDB backend and expose the appliation internally using a
+This helm deployment with set up WordPress frontend with a MariaDB backend and expose the application internally using a
 Cluster IP service.
 
 ```shell
