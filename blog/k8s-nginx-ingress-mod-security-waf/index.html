@@ -15,23 +15,25 @@ requests.</p><p><a href=https://github.com/coreruleset/coreruleset>ModSecurity O
 detection rules for the ModSecurity web application firewall (WAF). It provides protection against a wide range of known
 web application vulnerabilities and misconfigurations, such as SQL injection and cross-site scripting. It is developed
 and maintained by the Open Web Application Security Project (OWASP).</p><h2 id=flowchart>Flowchart <a href=#flowchart class=anchor aria-hidden=true>#</a></h2><pre><code class=language-mermaid>%%{init: {'theme':'dark'}}%%
-flowchart BT
-A(Client) -- Makes Request--&gt; INGRESS
-  subgraph NGINX[NGINX Ingress]
-    INGRESS[Ingress] --&gt; MOD
-    MOD[ModSecurity] -- Uses --&gt; OWASP{OWASP Ruleset}
-    OWASP --Decides--&gt; ALLOW[Allow Request]
-    OWASP --Decides--&gt; DENY[Deny Request]
-    EGRESS[Egress]
-  end
+flowchart
+A((Client)) -- Makes Request--&gt; INGRESS
+subgraph K8[Kubernets Cluster]
+ subgraph NGINX[NGINX Ingress]
+   INGRESS[Ingress] --&gt; MOD
+   MOD[ModSecurity] -- Uses --&gt; OWASP{OWASP Ruleset}
+   OWASP --Decides--&gt; ALLOW[Allow Request]
+   OWASP --Decides--&gt; DENY[Deny Request]
+   EGRESS[Egress]
+ end
+ ALLOW -- Routes --&gt; S(Wordpress Service)
+ S -- Routes to--&gt; W(Wordpress Pod)
+ W -- Queries--&gt; D[(SQL Database Pod)]
+ D -- Responds to --&gt; W
+ W -- Responds to --&gt; EGRESS
+end
 DENY -- Deny Request --&gt; A
-ALLOW -- Routes --&gt; S(Wordpress Service)
-S -- Routes to--&gt; W(Wordpress Pod)
-W -- Queries--&gt; D(SQL Database Pod)
-D -- Responds to --&gt; W
-W -- Responds to --&gt; EGRESS
-EGRESS --&gt; A
-</code></pre><h2 id=development-cluster-setup>Development Cluster Setup <a href=#development-cluster-setup class=anchor aria-hidden=true>#</a></h2><p>We can use Minikube to create a local desktop kubernetes cluster. After installation, we need to start our cluster.</p><pre><code class=language-shell>minikube start
+EGRESS -- Responds to --&gt; A
+</code></pre><p><a href=https://youtu.be/40VfZ_nIFWI>Ingress Networking Video</a></p><h2 id=development-cluster-setup>Development Cluster Setup <a href=#development-cluster-setup class=anchor aria-hidden=true>#</a></h2><p>We can use Minikube to create a local desktop kubernetes cluster. After installation, we need to start our cluster.</p><pre><code class=language-shell>minikube start
 </code></pre><h2 id=creating-a-testing-application>Creating a testing application <a href=#creating-a-testing-application class=anchor aria-hidden=true>#</a></h2><p>We will use WordPress as an example application and create the ingress for the service.</p><p>This helm deployment with set up WordPress frontend with a MariaDB backend and expose the appliation internally using a
 Cluster IP service.</p><pre><code class=language-shell>helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
