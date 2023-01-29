@@ -49,24 +49,27 @@ and maintained by the Open Web Application Security Project (OWASP).
 
 ```mermaid
 %%{init: {'theme':'dark'}}%%
-flowchart BT
-A(Client) -- Makes Request--> INGRESS
-  subgraph NGINX[NGINX Ingress]
-    INGRESS[Ingress] --> MOD
-    MOD[ModSecurity] -- Uses --> OWASP{OWASP Ruleset}
-    OWASP --Decides--> ALLOW[Allow Request]
-    OWASP --Decides--> DENY[Deny Request]
-    EGRESS[Egress]
-  end
+flowchart
+A((Client)) -- Makes Request--> INGRESS
+subgraph K8[Kubernets Cluster]
+ subgraph NGINX[NGINX Ingress]
+   INGRESS[Ingress] --> MOD
+   MOD[ModSecurity] -- Uses --> OWASP{OWASP Ruleset}
+   OWASP --Decides--> ALLOW[Allow Request]
+   OWASP --Decides--> DENY[Deny Request]
+   EGRESS[Egress]
+ end
+ ALLOW -- Routes --> S(Wordpress Service)
+ S -- Routes to--> W(Wordpress Pod)
+ W -- Queries--> D[(SQL Database Pod)]
+ D -- Responds to --> W
+ W -- Responds to --> EGRESS
+end
 DENY -- Deny Request --> A
-ALLOW -- Routes --> S(Wordpress Service)
-S -- Routes to--> W(Wordpress Pod)
-W -- Queries--> D(SQL Database Pod)
-D -- Responds to --> W
-W -- Responds to --> EGRESS
-EGRESS --> A
+EGRESS -- Responds to --> A
 ```
 
+[Ingress Networking Video](https://youtu.be/40VfZ_nIFWI)
 ## Development Cluster Setup
 
 We can use Minikube to create a local desktop kubernetes cluster. After installation, we need to start our cluster.
