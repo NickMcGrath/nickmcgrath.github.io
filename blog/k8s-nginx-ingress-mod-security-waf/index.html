@@ -19,7 +19,7 @@ flowchart
 A((Client)) -- Makes Request----&gt; INGRESS
 subgraph K8[Kubernets Cluster]
  subgraph NGINX[NGINX Ingress]
-   INGRESS[Ingress] --&gt; MOD
+   INGRESS[Ingress] -- Uses --&gt; MOD
    MOD[ModSecurity] -- Uses --&gt; OWASP{OWASP Ruleset}
    OWASP --Decides--&gt; ALLOW[Allow Request]
    OWASP --Decides--&gt; DENY[Deny Request]
@@ -36,7 +36,7 @@ end
 DENY -- Deny Request ---&gt; A
 EGRESS -- Responds to ----&gt; A
 </code></pre><p><a href=https://youtu.be/40VfZ_nIFWI>Ingress Networking Video</a></p><h2 id=development-cluster-setup>Development Cluster Setup <a href=#development-cluster-setup class=anchor aria-hidden=true>#</a></h2><p>We can use Minikube to create a local desktop kubernetes cluster. After installation, we need to start our cluster.</p><pre><code class=language-shell>minikube start
-</code></pre><h2 id=creating-a-testing-application>Creating a testing application <a href=#creating-a-testing-application class=anchor aria-hidden=true>#</a></h2><p>We will use WordPress as an example application and create the ingress for the service.</p><p>This helm deployment with set up WordPress frontend with a MariaDB backend and expose the appliation internally using a
+</code></pre><h2 id=creating-a-testing-application>Creating a testing application <a href=#creating-a-testing-application class=anchor aria-hidden=true>#</a></h2><p>We will use WordPress as an example application and create the ingress for the service.</p><p>This helm deployment with set up WordPress frontend with a MariaDB backend and expose the application internally using a
 Cluster IP service.</p><pre><code class=language-shell>helm repo add bitnami https://charts.bitnami.com/bitnami
 helm repo update
 helm upgrade --install wordpress bitnami/wordpress --set service.type=ClusterIP --set wordpressPassword='yolo' --version 15.2.33
