@@ -50,7 +50,7 @@ and maintained by the Open Web Application Security Project (OWASP).
 ```mermaid
 %%{init: {'theme':'dark'}}%%
 flowchart
-A((Client)) -- Makes Request--> INGRESS
+A((Client)) -- Makes Request----> INGRESS
 subgraph K8[Kubernets Cluster]
  subgraph NGINX[NGINX Ingress]
    INGRESS[Ingress] --> MOD
@@ -59,14 +59,16 @@ subgraph K8[Kubernets Cluster]
    OWASP --Decides--> DENY[Deny Request]
    EGRESS[Egress]
  end
+ subgraph WORDD[Wordpress Deployment]
  ALLOW -- Routes --> S(Wordpress Service)
  S -- Routes to--> W(Wordpress Pod)
  W -- Queries--> D[(SQL Database Pod)]
  D -- Responds to --> W
- W -- Responds to --> EGRESS
+ W -- Responds to ---> EGRESS
+ end
 end
-DENY -- Deny Request --> A
-EGRESS -- Responds to --> A
+DENY -- Deny Request ---> A
+EGRESS -- Responds to ----> A
 ```
 
 [Ingress Networking Video](https://youtu.be/40VfZ_nIFWI)
