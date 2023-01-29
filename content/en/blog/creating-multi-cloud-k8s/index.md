@@ -1,5 +1,5 @@
 ---
-title: "Creating Multi Cloud K8s Clusters"
+title: "K8s Creating Multi Cloud Clusters"
 description: "Exploring options on utilizing resources on multiple vendors using kubernetes"
 excerpt: "Exploring options on utilizing resources on multiple vendors using kubernetes"
 date: 2023-01-08T16:20:51-08:00
@@ -15,3 +15,5 @@ homepage: false
 ---
 
 ## Considerations for creating a multi cloud k8s cluster
+
+This is not a recommended way of setting up clusters, likely will not continue on this topic.

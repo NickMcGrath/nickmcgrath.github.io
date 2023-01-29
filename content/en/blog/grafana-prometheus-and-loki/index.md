@@ -1,5 +1,5 @@
 ---
-title: "Installing Grafana Prometheus and Loki in k8s"
+title: "K8s Installing Grafana Prometheus and Loki"
 description: ""
 excerpt: ""
 date: 2023-01-15T19:25:45-08:00
