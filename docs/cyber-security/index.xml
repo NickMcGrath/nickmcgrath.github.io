@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?><rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom"><channel><title>Cyber Security on</title><link>https://nickmcgrath.github.io/docs/cyber-security/</link><description>Recent content in Cyber Security on</description><generator>Hugo -- gohugo.io</generator><lastBuildDate>Tue, 25 Jan 2022 14:40:56 +0100</lastBuildDate><atom:link href="https://nickmcgrath.github.io/docs/cyber-security/index.xml" rel="self" type="application/rss+xml"/><item><title>Encryption Basics</title><link>https://nickmcgrath.github.io/docs/cyber-security/encryption/encryption-basics/</link><pubDate>Fri, 26 Apr 2024 13:58:58 -0700</pubDate><guid>https://nickmcgrath.github.io/docs/cyber-security/encryption/encryption-basics/</guid><description>Symmetric Encryption #
+&amp;quot;&amp;quot;&amp;quot;
+Fernet is built on top of a number of standard cryptographic primitives. Specifically it uses:
+AES in CBC mode with a 128-bit key for encryption; using PKCS7 padding.
+HMAC using SHA256 for authentication.
+Initialization vectors are generated using os.urandom().
+&amp;quot;&amp;quot;&amp;quot;
+from cryptography.fernet import Fernet
+key = Fernet.generate_key() # Generates a 128-bit key for encryption
+print(&amp;quot;Key:&amp;quot;, key)
+f = Fernet(key)
+data = bytes(&amp;quot;Hey dont look at me!&amp;quot;, &amp;quot;utf-8&amp;quot;)
+encrypted_data = f.</description></item></channel></rss>
