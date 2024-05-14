@@ -29,11 +29,12 @@
 #   url = "/tutorial/lorem/"
 #
 # THIS IS THE MAIN DOCS MENU AT TOP
-# [[main]]
-#   name = "Docs"
-#   url = "/docs/prologue/introduction/"
-# # url = "/docs/1.0/prologue/introduction/"
-#   weight = 10
+# todo: set this to relevant
+ [[main]]
+   name = "Docs"
+   url = "/docs/prologue/introduction/"
+ # url = "/docs/1.0/prologue/introduction/"
+   weight = 10
 
 # [[main]]
 #   name = "Tutorial"
